@@ -25,7 +25,7 @@ const ProgramAudience = () => {
                 setMobileScale(1);
             } else {
                 const availableWidth = window.innerWidth - TOTAL_PADDING;
-                const ms = Math.min(availableWidth / 410, 1);
+                const ms = availableWidth / 410;
                 setMobileScale(ms);
                 setScale(1);
             }
@@ -73,10 +73,12 @@ const ProgramAudience = () => {
                 <div
                     className={`${inter.className} absolute`}
                     style={{
-                        width: '1171px',
+                        width: '100%',
                         height: '51px',
                         top: '40px',
-                        left: '50%; transform: translateX(-50%)', // Centering logic helper
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                         textAlign: 'center',
                     }}
                 >
@@ -88,9 +90,6 @@ const ProgramAudience = () => {
                             letterSpacing: '-3px',
                             color: '#D5D5D5',
                             margin: 0,
-                            width: '1440px',
-                            position: 'relative',
-                            left: '-134px' // Adjusting to center within 1440px relative to its 1171px spec
                         }}
                     >
                         {'{ This Program Is Perfect If Your Are: }'}

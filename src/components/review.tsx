@@ -122,16 +122,16 @@ export default function Review() {
 
         // Calculate the center position of the viewport
         const viewportCenter = scrollLeft + (containerWidth / 2)
-        
+
         // Calculate padding (which shifts where cards start)
         const paddingLeft = (containerWidth / 2) - (cardDimensions.width / 2)
-        
+
         // The first card's center position
         const firstCardCenter = paddingLeft + (cardDimensions.width / 2)
-        
+
         // Calculate which card index is at the center
         const index = Math.round((viewportCenter - firstCardCenter) / totalStep)
-        
+
         setCenterIndex(index)
     }, [cardDimensions, totalStep])
 
@@ -205,14 +205,14 @@ export default function Review() {
         // Calculate exact center position
         const containerWidth = container.offsetWidth
         const paddingLeft = (containerWidth / 2) - (cardDimensions.width / 2)
-        
+
         // Position at the start of the middle set
         // We want the middle set's first card (index = baseCount) to be centered
         const targetCardCenter = paddingLeft + (cardDimensions.width / 2) + (baseCount * totalStep)
         const initialScrollPosition = targetCardCenter - (containerWidth / 2)
-        
+
         container.scrollLeft = initialScrollPosition
-        
+
         // Force update center index after setting scroll
         setTimeout(() => {
             updateCenterIndex()
@@ -257,14 +257,49 @@ export default function Review() {
     if (!mounted) return <div className="w-full h-[600px] bg-transparent" />
 
     const isDesktop = window.innerWidth >= 768
-    const sectionHeight = isDesktop ? Math.max(750 * scale, 600) : 600 * mobileScale
+
+    // Responsive section height calculation with proper padding
+    const getSectionHeight = () => {
+        if (isDesktop) {
+            // Desktop: Reduced gap + responsive scaling
+            return Math.max(680 * scale, 580)
+        } else {
+            // Mobile: Increase base height to 580 to prevent upward overlap
+            return 580 * mobileScale
+        }
+    }
+
+    const sectionHeight = getSectionHeight()
+
+    // Responsive gap between heading and cards
+    const getHeadingMarginBottom = () => {
+        if (isDesktop) {
+            // Desktop: Reduced from 105px to 50px, scales responsively
+            return `${Math.max(50 * scale, 40)}px`
+        } else {
+            // Mobile: Balanced bottom spacing
+            return '35px'
+        }
+    }
+
+    // Responsive top margin for heading
+    const getHeadingMarginTop = () => {
+        if (isDesktop) {
+            // Desktop: Consistent top padding that scales
+            return `${Math.max(30 * scale, 20)}px`
+        } else {
+            // Mobile: Increased top margin to prevent overlapping the CTA section
+            return '30px'
+        }
+    }
 
     return (
         <section
             className="w-full relative flex items-center justify-center overflow-hidden bg-transparent"
             style={{
                 height: `${sectionHeight}px`,
-                minHeight: `${sectionHeight}px`
+                minHeight: `${sectionHeight}px`,
+                paddingBottom: isDesktop ? `${Math.max(40 * scale, 30)}px` : '0px',
             }}
         >
             <div
@@ -280,8 +315,8 @@ export default function Review() {
                     className="relative w-full flex flex-col items-start"
                     style={{
                         paddingLeft: isDesktop ? '52px' : '16px',
-                        marginBottom: isDesktop ? '105px' : '28px',
-                        marginTop: isDesktop ? '0px' : '20px',
+                        marginBottom: getHeadingMarginBottom(),
+                        marginTop: getHeadingMarginTop(),
                         zIndex: 20,
                     }}
                 >

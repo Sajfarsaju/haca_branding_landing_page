@@ -29,7 +29,7 @@ const Hero = () => {
                 // Mobile Scale calculation
                 // Base width is reduced to 410px to make components look larger
                 const availableWidth = window.innerWidth - TOTAL_PADDING;
-                const ms = Math.min(availableWidth / 410, 1);
+                const ms = availableWidth / 410;
                 setMobileScale(ms);
                 setScale(1); // Reset desktop scale
             }

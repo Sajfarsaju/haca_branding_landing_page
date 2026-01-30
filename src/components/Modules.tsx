@@ -25,7 +25,7 @@ const Modules = () => {
                 setMobileScale(1);
             } else {
                 const availableWidth = window.innerWidth - TOTAL_PADDING;
-                const ms = Math.min(availableWidth / 410, 1);
+                const ms = availableWidth / 410;
                 setMobileScale(ms);
                 setScale(1);
             }
