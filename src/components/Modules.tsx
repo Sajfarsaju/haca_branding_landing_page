@@ -190,10 +190,10 @@ const Modules = () => {
                 <h2
                     className={`${inter.className} absolute`}
                     style={{
-                        width: '343px',
+                        width: '390px',
                         height: '37px',
                         top: '40px',
-                        left: '16px',
+                        left: '10px',
                         fontWeight: 600,
                         fontSize: '40px',
                         lineHeight: '37px',
@@ -209,22 +209,22 @@ const Modules = () => {
                 <div
                     className="absolute flex flex-col"
                     style={{
-                        width: '343px',
+                        width: '390px',
                         height: '688px',
                         top: '100px',
-                        left: '16px',
+                        left: '10px',
                         gap: '20px',
                     }}
                 >
                     {rows.map((row, index) => (
-                        <div key={index} style={{ width: '343px', height: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                        <div key={index} style={{ width: '390px', height: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             {/* Line Component */}
-                            <div style={{ width: '343px', height: '1px', backgroundColor: '#313131' }} />
+                            <div style={{ width: '390px', height: '1px', backgroundColor: '#313131' }} />
 
                             {/* Inner Content */}
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                                 {/* Week and Title Row */}
-                                <div style={{ display: 'flex', justifyContent: 'space-between', width: '343px', alignItems: 'baseline' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', width: '390px', alignItems: 'baseline' }}>
                                     <span className={inter.className} style={{
                                         fontWeight: 600,
                                         fontSize: '14px',
@@ -234,7 +234,7 @@ const Modules = () => {
                                     }}>{row.week}</span>
 
                                     <span className={inter.className} style={{
-                                        width: '220px',
+                                        width: '260px',
                                         textAlign: 'right',
                                         fontWeight: 500,
                                         fontSize: '18px',
@@ -246,7 +246,7 @@ const Modules = () => {
 
                                 {/* Description */}
                                 <p className={inter.className} style={{
-                                    width: '343px',
+                                    width: '390px',
                                     fontWeight: 600,
                                     fontSize: '14px',
                                     lineHeight: '17px',
@@ -260,7 +260,7 @@ const Modules = () => {
                         </div>
                     ))}
                     {/* Final Bottom Line */}
-                    <div style={{ width: '343px', height: '1px', backgroundColor: '#313131' }} />
+                    <div style={{ width: '390px', height: '1px', backgroundColor: '#313131' }} />
                 </div>
             </div>
         </section>

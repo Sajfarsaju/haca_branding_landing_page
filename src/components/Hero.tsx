@@ -326,9 +326,9 @@ const Hero = () => {
             <div
                 className="block md:hidden absolute top-0 origin-top-left transition-transform duration-100 ease-linear"
                 style={{
-                    width: '430px', // Canvas width required for the 130px offset + 300px label
+                    width: '410px', // Matched to scale base
                     height: '100%',
-                    left: '10px', // Horizontal padding shift (reduced)
+                    left: '10px',
                     transform: `scale(${mobileScale})`,
                 }}
             >
@@ -337,7 +337,7 @@ const Hero = () => {
                     <div
                         className="absolute transition-all duration-500 ease-in-out"
                         style={{
-                            width: '322px',
+                            width: '390px',
                             height: '504px',
                             top: '153.07px',
                             left: '10px',
@@ -354,12 +354,12 @@ const Hero = () => {
                 </div>
 
                 {/* Logo - Mobile */}
-                <div className="absolute z-30 top-[16px] left-[10px] w-[127px] h-[32.34px]">
+                <div className="absolute z-30 top-[16px] left-[10px] w-[140px] h-[35px]">
                     <Image
                         src="/haca_logo.svg"
                         alt="Haca Logo"
-                        width={127}
-                        height={32}
+                        width={140}
+                        height={35}
                         priority
                         className="object-contain"
                     />
@@ -371,16 +371,16 @@ const Hero = () => {
                     style={{
                         top: '83px',
                         left: '10px',
-                        width: '220px',
-                        height: '74px',
+                        width: '300px',
+                        height: '90px',
                     }}
                 >
                     <h1
                         className="font-semibold"
                         style={{
                             color: '#D5D5D5',
-                            fontSize: '40px',
-                            lineHeight: '37px',
+                            fontSize: '48px',
+                            lineHeight: '44px',
                             letterSpacing: '-3px',
                             margin: 0,
                         }}
@@ -393,42 +393,42 @@ const Hero = () => {
                 {/* Photo Design Group - Mobile */}
                 <div className="absolute z-10 w-full h-full">
                     {/* Photo 1 - Mobile */}
-                    <div className="absolute" style={{ top: '130px', left: '239px', width: '119.67px', height: '116.01px' }}>
+                    <div className="absolute" style={{ top: '130px', left: '280px', width: '145px', height: '140px' }}>
                         <Image
                             src="/photo 1.svg"
                             alt="Design Photo 1"
-                            width={120}
-                            height={116}
+                            width={145}
+                            height={140}
                             className="object-contain"
                         />
                     </div>
                     {/* Photo 2 - Mobile */}
-                    <div className="absolute" style={{ top: '264px', left: '26px', width: '132px', height: '49.69px' }}>
+                    <div className="absolute" style={{ top: '264px', left: '20px', width: '160px', height: '60px' }}>
                         <Image
                             src="/photo 2.svg"
                             alt="Design Photo 2"
-                            width={132}
-                            height={50}
+                            width={160}
+                            height={60}
                             className="object-contain"
                         />
                     </div>
                     {/* Photo 3 - Mobile */}
-                    <div className="absolute" style={{ top: '335px', left: '222px', width: '119.65px', height: '116px' }}>
+                    <div className="absolute" style={{ top: '335px', left: '255px', width: '145px', height: '140px' }}>
                         <Image
                             src="/photo 3.svg"
                             alt="Design Photo 3"
-                            width={120}
-                            height={116}
+                            width={145}
+                            height={140}
                             className="object-contain"
                         />
                     </div>
                     {/* Photo 4 - Mobile */}
-                    <div className="absolute" style={{ top: '532px', left: '20px', width: '166.17px', height: '79px' }}>
+                    <div className="absolute" style={{ top: '532px', left: '10px', width: '200px', height: '95px' }}>
                         <Image
                             src="/photo 4.svg"
                             alt="Design Photo 4"
-                            width={166}
-                            height={79}
+                            width={200}
+                            height={95}
                             className="object-contain"
                         />
                     </div>
@@ -442,14 +442,14 @@ const Hero = () => {
                         style={{
                             position: 'absolute',
                             top: '197px',
-                            left: '37px',
-                            width: '127px',
-                            height: '20px',
+                            left: '40px',
+                            width: '150px',
+                            height: '24px',
                             background: '#000000',
                         }}
                     >
                         <span style={{
-                            fontSize: '14px',
+                            fontSize: '16px',
                             lineHeight: '45.06px',
                             fontWeight: 600,
                             color: '#D5D5D5',
@@ -465,15 +465,15 @@ const Hero = () => {
                         className="flex items-center justify-center"
                         style={{
                             position: 'absolute',
-                            top: '358px',
-                            left: '25px',
-                            width: '160px',
-                            height: '25px',
+                            top: '365px',
+                            left: '30px',
+                            width: '190px',
+                            height: '30px',
                             background: '#000000',
                         }}
                     >
                         <span style={{
-                            fontSize: '14px',
+                            fontSize: '16px',
                             lineHeight: '24.86px',
                             fontWeight: 600,
                             color: '#D5D5D5',
@@ -489,15 +489,15 @@ const Hero = () => {
                         className="flex items-center justify-center"
                         style={{
                             position: 'absolute',
-                            top: '472px',
-                            left: '71px',
-                            width: '245px',
-                            height: '25px',
+                            top: '490px',
+                            left: '80px',
+                            width: '290px',
+                            height: '30px',
                             background: '#000000',
                         }}
                     >
                         <span style={{
-                            fontSize: '14px',
+                            fontSize: '16px',
                             lineHeight: '24.86px',
                             fontWeight: 600,
                             color: '#D5D5D5',
@@ -513,16 +513,16 @@ const Hero = () => {
                         className="flex flex-col justify-center"
                         style={{
                             position: 'absolute',
-                            top: '637px',
-                            left: '125px',
+                            top: '640px',
+                            left: '175px',
                             width: '300px',
                         }}
                     >
                         <span style={{
                             fontFamily: 'Inter',
                             fontWeight: 700,
-                            fontSize: '18px',
-                            lineHeight: '22px',
+                            fontSize: '20px',
+                            lineHeight: '24px',
                             letterSpacing: '-0.8px',
                             color: '#FFFFFF',
                             whiteSpace: 'nowrap',
@@ -532,8 +532,8 @@ const Hero = () => {
                         <span style={{
                             fontFamily: 'Inter',
                             fontWeight: 500,
-                            fontSize: '18px',
-                            lineHeight: '22px',
+                            fontSize: '20px',
+                            lineHeight: '24px',
                             letterSpacing: '-0.8px',
                             color: '#888888',
                             whiteSpace: 'nowrap',
@@ -547,10 +547,10 @@ const Hero = () => {
                 <div
                     className="absolute cursor-pointer hover:opacity-80 transition-opacity"
                     style={{
-                        top: '716px',
-                        left: '121px',
-                        width: '132.54px',
-                        height: '50.54px',
+                        top: '720px',
+                        left: '130px',
+                        width: '160px',
+                        height: '60px',
                         opacity: 1,
                         zIndex: 40,
                     }}
@@ -558,8 +558,8 @@ const Hero = () => {
                     <Image
                         src="/Enquire Now (white).svg"
                         alt="Enquire Now"
-                        width={133}
-                        height={51}
+                        width={160}
+                        height={60}
                         className="object-contain"
                     />
                 </div>

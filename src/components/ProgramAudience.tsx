@@ -278,9 +278,9 @@ const ProgramAudience = () => {
                 <div
                     className="absolute"
                     style={{
-                        width: '343px',
+                        width: '390px',
                         height: '950px',
-                        left: '6px',
+                        left: '10px',
                         // Border removed as requested
                         borderRadius: '10px',
                     }}
@@ -290,10 +290,10 @@ const ProgramAudience = () => {
                 <div
                     className={`${inter.className} absolute`}
                     style={{
-                        width: '255px',
+                        width: '390px',
                         height: '64px',
                         top: '40px',
-                        left: '50px', // Adjusted for mobile center
+                        left: '10px', // Adjusted for mobile center
                         textAlign: 'center',
                     }}
                 >
@@ -314,10 +314,10 @@ const ProgramAudience = () => {
                 <div
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
-                        width: '245px',
+                        width: '320px',
                         height: '134px',
                         top: '164px', // Further shifted down for "normal" gap
-                        left: '16px',
+                        left: '10px',
                         padding: '46px 10px',
                         gap: '10px',
                         border: '1px solid #313131',
@@ -325,7 +325,7 @@ const ProgramAudience = () => {
                     }}
                 >
                     <p style={{
-                        width: '211px',
+                        width: '290px',
                         height: '42px',
                         fontWeight: 500,
                         fontSize: '16px',
@@ -343,10 +343,10 @@ const ProgramAudience = () => {
                 <div
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
-                        width: '245px',
+                        width: '320px',
                         height: '134px',
                         top: '328px', // Shifted
-                        left: '114px',
+                        left: '80px',
                         padding: '46px 10px',
                         gap: '10px',
                         border: '1px solid #313131',
@@ -354,7 +354,7 @@ const ProgramAudience = () => {
                     }}
                 >
                     <p style={{
-                        width: '191px',
+                        width: '290px',
                         height: '42px',
                         fontWeight: 500,
                         fontSize: '16px',
@@ -372,10 +372,10 @@ const ProgramAudience = () => {
                 <div
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
-                        width: '245px',
+                        width: '320px',
                         height: '134px',
                         top: '492px', // Shifted
-                        left: '16px',
+                        left: '10px',
                         padding: '46px 10px',
                         gap: '10px',
                         border: '1px solid #313131',
@@ -383,7 +383,7 @@ const ProgramAudience = () => {
                     }}
                 >
                     <p style={{
-                        width: '211px',
+                        width: '290px',
                         height: '42px',
                         fontWeight: 500,
                         fontSize: '16px',
@@ -401,10 +401,10 @@ const ProgramAudience = () => {
                 <div
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
-                        width: '245px',
+                        width: '320px',
                         height: '134px',
                         top: '656px', // Shifted
-                        left: '114px',
+                        left: '80px',
                         padding: '46px 10px',
                         gap: '10px',
                         border: '1px solid #313131',
@@ -412,7 +412,7 @@ const ProgramAudience = () => {
                     }}
                 >
                     <p style={{
-                        width: '191px',
+                        width: '290px',
                         height: '42px',
                         fontWeight: 500,
                         fontSize: '16px',
@@ -430,10 +430,10 @@ const ProgramAudience = () => {
                 <div
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
-                        width: '245px',
+                        width: '320px',
                         height: '134px',
                         top: '820px', // Shifted
-                        left: '16px',
+                        left: '10px',
                         padding: '46px 10px',
                         gap: '10px',
                         border: '1px solid #313131',
@@ -441,7 +441,7 @@ const ProgramAudience = () => {
                     }}
                 >
                     <p style={{
-                        width: '211px',
+                        width: '290px',
                         height: '42px',
                         fontWeight: 500,
                         fontSize: '16px',

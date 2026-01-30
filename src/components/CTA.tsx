@@ -20,7 +20,8 @@ const CTA = () => {
                 setScale(s);
                 setMobileScale(1);
             } else {
-                const ms = Math.min(window.innerWidth / 410, 1);
+                // Scale proportionally from 410px base to current width
+                const ms = window.innerWidth / 410;
                 setMobileScale(ms);
                 setScale(1);
             }
@@ -157,7 +158,6 @@ const CTA = () => {
                             width: '311px',
                             height: '311px',
                             top: '-80px',
-                            // bottom: '500px',
                             right: '-60px',
                             transform: 'rotate(20deg)',
                             zIndex: 0,
@@ -177,9 +177,7 @@ const CTA = () => {
                             position: 'absolute',
                             width: '166px',
                             height: '166px',
-                            // bottom: '400px',
                             top: '270px',
-                            // left: '50px',
                             right: '318px',
                             zIndex: 1,
                         }}
@@ -214,15 +212,14 @@ const CTA = () => {
 
             {/* 
               ========================================
-              MOBILE LAYOUT 
+              MOBILE LAYOUT (Scales from 410px base)
               ========================================
              */}
             <div
-                className="block md:hidden absolute top-0 origin-top-left transition-transform duration-100 ease-linear"
+                className="block md:hidden absolute top-0 left-0 origin-top-left transition-transform duration-100 ease-linear"
                 style={{
                     width: '410px',
                     height: '520px',
-                    left: '0px',
                     transform: `scale(${mobileScale})`,
                 }}
             >
@@ -304,12 +301,12 @@ const CTA = () => {
                     </div>
                 </div>
 
-                {/* Photo Group with Decorative Elements - Bottom Right */}
+                {/* Photo Group with Decorative Elements - Bottom Left (Sticky) */}
                 <div
                     style={{
                         position: 'absolute',
                         bottom: '0',
-                        right: '0',
+                        left: '0',
                         width: '410px',
                         height: '359px',
                     }}
@@ -353,20 +350,20 @@ const CTA = () => {
                         />
                     </div>
 
-                    {/* Photo */}
+                    {/* Photo - Sticky to Bottom Left */}
                     <Image
                         src="/the girls photo.png"
                         alt="Program participants"
-                        width={724}
+                        width={410}
                         height={359}
                         style={{
                             position: 'absolute',
                             bottom: '0',
-                            // right: '-314px',
-                            width: '724px',
+                            left: '0',
+                            width: '410px',
                             height: '359px',
                             objectFit: 'contain',
-                            objectPosition: 'bottom right',
+                            objectPosition: 'bottom left',
                             zIndex: 2,
                         }}
                     />
