@@ -54,7 +54,7 @@ const Features = () => {
 
     return (
         <section
-            className="w-full relative bg-black overflow-hidden"
+            className="w-full relative bg-black overflow-hidden flex items-center justify-center"
             style={{
                 height: `${sectionHeight}px`,
                 minHeight: `${sectionHeight}px`,

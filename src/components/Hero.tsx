@@ -50,7 +50,7 @@ const Hero = () => {
 
     return (
         <section
-            className="w-full relative bg-black overflow-hidden"
+            className="w-full relative bg-black overflow-hidden flex items-center justify-center"
             style={{
                 height: `${sectionHeight}px`,
                 minHeight: `${sectionHeight}px`,
@@ -67,7 +67,7 @@ const Hero = () => {
                 style={{
                     width: '1440px',
                     height: '100%',
-                    left: '10px', // Shifted to respect reduced HORIZONTAL_PADDING
+                    left: '50px', // Shifted to respect reduced HORIZONTAL_PADDING
                     transform: `scale(${scale})`,
                 }}
             >

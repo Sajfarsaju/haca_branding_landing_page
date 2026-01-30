@@ -40,7 +40,7 @@ const CTA = () => {
 
     return (
         <section
-            className="w-full relative bg-white overflow-hidden"
+            className="w-full relative bg-white overflow-hidden flex items-center justify-center"
             style={{
                 height: `${sectionHeight}px`,
                 minHeight: `${sectionHeight}px`,
@@ -151,13 +151,15 @@ const CTA = () => {
                 >
                     {/* Sun Design (Behind Photo - positioned relative to photo) */}
                     <div
+                        className="hidden md:block"
                         style={{
                             position: 'absolute',
                             width: '311px',
                             height: '311px',
-                            bottom: '450px',
-                            left: '-80px',
-                            transform: 'rotate(-48.53deg)',
+                            top: '-80px',
+                            // bottom: '500px',
+                            right: '-60px',
+                            transform: 'rotate(20deg)',
                             zIndex: 0,
                         }}
                     >
@@ -175,8 +177,10 @@ const CTA = () => {
                             position: 'absolute',
                             width: '166px',
                             height: '166px',
-                            bottom: '400px',
-                            left: '50px',
+                            // bottom: '400px',
+                            top: '270px',
+                            // left: '50px',
+                            right: '318px',
                             zIndex: 1,
                         }}
                     >
@@ -316,9 +320,9 @@ const CTA = () => {
                             position: 'absolute',
                             width: '133px',
                             height: '71px',
-                            top: '0px',
-                            right: '50px',
-                            transform: 'rotate(-48.44deg)',
+                            top: '30px',
+                            right: '-33px',
+                            transform: 'rotate(20deg)',
                             zIndex: 0,
                         }}
                     >
@@ -336,8 +340,8 @@ const CTA = () => {
                             position: 'absolute',
                             width: '68px',
                             height: '68px',
-                            top: '80px',
-                            right: '180px',
+                            top: '180px',
+                            right: '150px',
                             zIndex: 1,
                         }}
                     >
@@ -358,7 +362,7 @@ const CTA = () => {
                         style={{
                             position: 'absolute',
                             bottom: '0',
-                            right: '-314px',
+                            // right: '-314px',
                             width: '724px',
                             height: '359px',
                             objectFit: 'contain',

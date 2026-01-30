@@ -4,10 +4,7 @@ import Modules from "@/components/Modules";
 import Features from "@/components/Features";
 import Flowchart from "@/components/Flowchart";
 import CTA from "@/components/CTA";
-import Stats from "@/components/Stats";
-import Testimonials from "@/components/Testimonials";
-import Footer from "@/components/Footer";
-import PopupForm from "@/components/PopupForm";
+import Review from "@/components/review";
 
 export default function Home() {
   return (
@@ -18,10 +15,8 @@ export default function Home() {
       <Features />
       <Flowchart />
       <CTA />
-      <Stats />
-      <Testimonials />
-      <Footer />
-      {/* <PopupForm /> */}
+      <Review />
+
     </main>
   );
 }
