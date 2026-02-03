@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import React from 'react';
+import { motion, Variants } from 'framer-motion';
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -52,6 +53,54 @@ const Features = () => {
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
     const sectionHeight = isDesktop ? 500 * scale : 550 * mobileScale;
 
+    // Animation Variants
+    const containerVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants: Variants = {
+        hidden: { scale: 0.8, opacity: 0 },
+        visible: {
+            scale: 1,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 120,
+                damping: 20
+            }
+        }
+    };
+
+    const titleVariants: Variants = {
+        hidden: { y: -20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    };
+
+    const gridVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 0.5,
+            transition: {
+                duration: 1.5,
+                ease: "linear"
+            }
+        }
+    };
+
     return (
         <section
             className="w-full relative bg-black overflow-hidden flex items-center justify-center"
@@ -66,8 +115,12 @@ const Features = () => {
               DESKTOP LAYOUT 
               ========================================
              */}
-            <div
-                className="hidden md:block absolute top-0 origin-top-left transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={containerVariants}
+                className="hidden md:block absolute top-0 origin-top-left"
                 style={{
                     width: '1440px',
                     height: '500px',
@@ -76,7 +129,7 @@ const Features = () => {
                 }}
             >
                 {/* Heading */}
-                <h2
+                <motion.h2
                     className={`${inter.className} absolute text-center flex items-center justify-center`}
                     style={{
                         width: '1044px',
@@ -90,23 +143,24 @@ const Features = () => {
                         color: '#D5D5D5',
                         margin: 0,
                     }}
+                    variants={titleVariants}
                 >
                     {'{ Why Designers Choose This Program }'}
-                </h2>
+                </motion.h2>
 
                 {/* Grid Design - Desktop Only */}
-                <div
+                <motion.div
                     className="absolute"
                     style={{
-                        width: '1077.34px', // 22 cells * 48.97px
-                        height: '293.82px', // 6 cells * 48.97px
+                        width: '1077.34px',
+                        height: '293.82px',
                         top: '124px',
                         left: '181px',
-                        opacity: 0.5,
                         border: '1.12px solid #313131',
                         pointerEvents: 'none',
                         zIndex: 0,
                     }}
+                    variants={gridVariants}
                 >
                     {/* Horizontal Lines */}
                     {[...Array(7)].map((_, i) => (
@@ -136,7 +190,7 @@ const Features = () => {
                             }}
                         />
                     ))}
-                </div>
+                </motion.div>
 
                 {/* Points Container - Desktop Refined */}
                 <div
@@ -158,8 +212,10 @@ const Features = () => {
                         }}
                     >
                         {points.slice(0, 3).map((point, i) => (
-                            <div
+                            <motion.div
                                 key={i}
+                                variants={itemVariants}
+                                whileHover={{ scale: 1.05, borderColor: '#FFFFFF' }}
                                 className={`${inter.className} flex items-center justify-center border border-[#BBBBBBCC] rounded-[10px] bg-black`}
                                 style={{
                                     width: 'fit-content',
@@ -168,6 +224,7 @@ const Features = () => {
                                     paddingRight: '40px',
                                     boxSizing: 'border-box',
                                     flexShrink: 0,
+                                    cursor: 'default'
                                 }}
                             >
                                 <span style={{
@@ -184,7 +241,7 @@ const Features = () => {
                                 }}>
                                     {point}
                                 </span>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                     {/* Second Line - Remaining 3 Points */}
@@ -195,8 +252,10 @@ const Features = () => {
                         }}
                     >
                         {points.slice(3, 6).map((point, i) => (
-                            <div
+                            <motion.div
                                 key={i + 3}
+                                variants={itemVariants}
+                                whileHover={{ scale: 1.05, borderColor: '#FFFFFF' }}
                                 className={`${inter.className} flex items-center justify-center border border-[#BBBBBBCC] rounded-[10px] bg-black`}
                                 style={{
                                     width: 'fit-content',
@@ -205,6 +264,7 @@ const Features = () => {
                                     paddingRight: '40px',
                                     boxSizing: 'border-box',
                                     flexShrink: 0,
+                                    cursor: 'default'
                                 }}
                             >
                                 <span style={{
@@ -221,19 +281,23 @@ const Features = () => {
                                 }}>
                                     {point}
                                 </span>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* 
               ========================================
               MOBILE LAYOUT 
               ========================================
              */}
-            <div
-                className="block md:hidden absolute top-0 origin-top-left transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={containerVariants}
+                className="block md:hidden absolute top-0 origin-top-left"
                 style={{
                     width: '410px',
                     height: '550px',
@@ -242,7 +306,7 @@ const Features = () => {
                 }}
             >
                 {/* Heading */}
-                <h2
+                <motion.h2
                     className={`${inter.className} absolute flex items-center justify-center text-center`}
                     style={{
                         width: '343px',
@@ -256,9 +320,10 @@ const Features = () => {
                         color: '#D5D5D5',
                         margin: 0,
                     }}
+                    variants={titleVariants}
                 >
                     Why Designers Choose <br /> This Program
-                </h2>
+                </motion.h2>
 
                 {/* Points Container - Mobile */}
                 <div
@@ -272,8 +337,9 @@ const Features = () => {
                     }}
                 >
                     {points.map((point, i) => (
-                        <div
+                        <motion.div
                             key={i}
+                            variants={itemVariants}
                             className={`${inter.className} flex items-center border border-[#BBBBBBCC] rounded-[10px] bg-[#000000]`}
                             style={{
                                 width: 'fit-content',
@@ -289,10 +355,10 @@ const Features = () => {
                             }}
                         >
                             {point}
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import React from 'react';
+import { motion, Variants } from 'framer-motion';
 import { Inter } from "next/font/google";
 import Image from 'next/image';
 
@@ -39,6 +40,55 @@ const CTA = () => {
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
     const sectionHeight = isDesktop ? 735 * scale : 520 * mobileScale;
 
+    // Animation Variants
+    const containerVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.3
+            }
+        }
+    };
+
+    const textVariants: Variants = {
+        hidden: { x: -30, opacity: 0 },
+        visible: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    };
+
+    const photoVariants: Variants = {
+        hidden: { y: 100, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 1,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    };
+
+    const decoVariants: Variants = {
+        hidden: { scale: 0.8, opacity: 0 },
+        visible: {
+            scale: 1,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 50,
+                damping: 10
+            }
+        }
+    };
+
     return (
         <section
             className="w-full relative bg-white overflow-hidden flex items-center justify-center"
@@ -53,8 +103,12 @@ const CTA = () => {
               DESKTOP LAYOUT 
               ========================================
              */}
-            <div
-                className="hidden md:block absolute top-0 origin-top-left transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={containerVariants}
+                className="hidden md:block absolute top-0 origin-top-left"
                 style={{
                     width: '1440px',
                     height: '735px',
@@ -87,7 +141,7 @@ const CTA = () => {
                         }}
                     >
                         {/* Heading */}
-                        <h2
+                        <motion.h2
                             className={inter.className}
                             style={{
                                 width: '757px',
@@ -99,14 +153,15 @@ const CTA = () => {
                                 color: '#000000',
                                 margin: 0,
                             }}
+                            variants={textVariants}
                         >
                             You can keep guessing.<br />
                             or you can start the <br />
                             process.
-                        </h2>
+                        </motion.h2>
 
                         {/* Subtext */}
-                        <p
+                        <motion.p
                             className={inter.className}
                             style={{
                                 width: '734px',
@@ -118,26 +173,32 @@ const CTA = () => {
                                 color: '#000000',
                                 margin: 0,
                             }}
+                            variants={textVariants}
                         >
                             Apply Now and Reserve Your Seat
-                        </p>
+                        </motion.p>
                     </div>
 
                     {/* Button */}
-                    <div
-                        className="cursor-pointer hover:opacity-80 transition-opacity"
+                    <motion.div
+                        className="cursor-pointer"
                         style={{
                             width: 'fit-content',
                             height: 'fit-content',
                         }}
+                        variants={textVariants}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                     >
                         <Image
                             src="/Enquire Now (black).svg"
                             alt="Enquire Now"
                             width={177}
                             height={64}
+                            sizes="177px"
+                            loading="lazy"
                         />
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* Photo Group with Decorative Elements - Bottom Right */}
@@ -151,7 +212,7 @@ const CTA = () => {
                     }}
                 >
                     {/* Sun Design (Behind Photo - positioned relative to photo) */}
-                    <div
+                    <motion.div
                         className="hidden md:block"
                         style={{
                             position: 'absolute',
@@ -159,20 +220,24 @@ const CTA = () => {
                             height: '311px',
                             top: '-80px',
                             right: '-60px',
-                            transform: 'rotate(20deg)',
                             zIndex: 0,
                         }}
+                        variants={decoVariants}
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     >
                         <Image
                             src="/sun.svg"
                             alt="Sun decoration"
                             width={311}
                             height={311}
+                            sizes="311px"
+                            loading="lazy"
                         />
-                    </div>
+                    </motion.div>
 
                     {/* Block Design (Behind Photo - positioned relative to photo) */}
-                    <div
+                    <motion.div
                         style={{
                             position: 'absolute',
                             width: '166px',
@@ -181,42 +246,59 @@ const CTA = () => {
                             right: '318px',
                             zIndex: 1,
                         }}
+                        variants={decoVariants}
+                        animate={{ y: [0, -15, 0] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                     >
                         <Image
                             src="/block.svg"
                             alt="Block decoration"
                             width={166}
                             height={166}
+                            sizes="166px"
+                            loading="lazy"
                         />
-                    </div>
+                    </motion.div>
 
                     {/* Photo */}
-                    <Image
-                        src="/the girls photo.png"
-                        alt="Program participants"
-                        width={862}
-                        height={668}
+                    <motion.div
+                        variants={photoVariants}
                         style={{
                             position: 'absolute',
                             bottom: '0',
                             right: '0',
                             width: '862px',
                             height: '668px',
-                            objectFit: 'contain',
-                            objectPosition: 'bottom right',
                             zIndex: 2,
                         }}
-                    />
+                    >
+                        <Image
+                            src="/the girls photo.png"
+                            alt="Program participants"
+                            fill
+                            sizes="(min-width: 768px) 862px, 410px"
+                            quality={85}
+                            loading="lazy"
+                            style={{
+                                objectFit: 'contain',
+                                objectPosition: 'bottom right',
+                            }}
+                        />
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* 
               ========================================
               MOBILE LAYOUT (Scales from 410px base)
               ========================================
              */}
-            <div
-                className="block md:hidden absolute top-0 left-0 origin-top-left transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={containerVariants}
+                className="block md:hidden absolute top-0 left-0 origin-top-left"
                 style={{
                     width: '410px',
                     height: '520px',
@@ -248,7 +330,7 @@ const CTA = () => {
                         }}
                     >
                         {/* Heading */}
-                        <h2
+                        <motion.h2
                             className={inter.className}
                             style={{
                                 width: '355.81px',
@@ -260,14 +342,15 @@ const CTA = () => {
                                 color: '#000000',
                                 margin: 0,
                             }}
+                            variants={textVariants}
                         >
                             You can keep guessing.<br />
                             or you can start the <br />
                             process.
-                        </h2>
+                        </motion.h2>
 
                         {/* Subtext */}
-                        <p
+                        <motion.p
                             className={inter.className}
                             style={{
                                 width: '345px',
@@ -279,26 +362,32 @@ const CTA = () => {
                                 color: '#000000',
                                 margin: 0,
                             }}
+                            variants={textVariants}
                         >
                             Apply Now and Reserve Your Seat
-                        </p>
+                        </motion.p>
                     </div>
 
                     {/* Button */}
-                    <div
-                        className="cursor-pointer hover:opacity-80 transition-opacity"
+                    <motion.div
+                        className="cursor-pointer"
                         style={{
                             width: 'fit-content',
                             height: 'fit-content',
                         }}
+                        variants={textVariants}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                     >
                         <Image
                             src="/Enquire Now (black).svg"
                             alt="Enquire Now"
                             width={133}
                             height={51}
+                            sizes="133px"
+                            loading="lazy"
                         />
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* Photo Group with Decorative Elements - Bottom Left (Sticky) */}
@@ -312,27 +401,31 @@ const CTA = () => {
                     }}
                 >
                     {/* Sun Design (Behind Photo - positioned relative to photo) */}
-                    <div
+                    <motion.div
                         style={{
                             position: 'absolute',
                             width: '133px',
                             height: '71px',
                             top: '30px',
                             right: '-33px',
-                            transform: 'rotate(20deg)',
                             zIndex: 0,
                         }}
+                        variants={decoVariants}
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                     >
                         <Image
                             src="/sun.svg"
                             alt="Sun decoration"
                             width={133}
                             height={71}
+                            sizes="133px"
+                            loading="lazy"
                         />
-                    </div>
+                    </motion.div>
 
                     {/* Block Design (Behind Photo - positioned relative to photo) */}
-                    <div
+                    <motion.div
                         style={{
                             position: 'absolute',
                             width: '68px',
@@ -341,34 +434,47 @@ const CTA = () => {
                             right: '150px',
                             zIndex: 1,
                         }}
+                        variants={decoVariants}
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
                         <Image
                             src="/block.svg"
                             alt="Block decoration"
                             width={68}
                             height={68}
+                            sizes="68px"
+                            loading="lazy"
                         />
-                    </div>
+                    </motion.div>
 
                     {/* Photo - Sticky to Bottom Left */}
-                    <Image
-                        src="/the girls photo.png"
-                        alt="Program participants"
-                        width={410}
-                        height={359}
+                    <motion.div
+                        variants={photoVariants}
                         style={{
                             position: 'absolute',
                             bottom: '0',
                             left: '0',
                             width: '410px',
                             height: '359px',
-                            objectFit: 'contain',
-                            objectPosition: 'bottom left',
                             zIndex: 2,
                         }}
-                    />
+                    >
+                        <Image
+                            src="/the girls photo.png"
+                            alt="Program participants"
+                            fill
+                            sizes="(min-width: 768px) 862px, 410px"
+                            quality={85}
+                            loading="lazy"
+                            style={{
+                                objectFit: 'contain',
+                                objectPosition: 'bottom left',
+                            }}
+                        />
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

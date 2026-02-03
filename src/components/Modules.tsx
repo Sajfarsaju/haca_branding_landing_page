@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import React from 'react';
+import { motion, Variants } from 'framer-motion';
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -71,6 +72,63 @@ const Modules = () => {
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
     const sectionHeight = isDesktop ? 1050 * scale : 820 * mobileScale;
 
+    // Animation Variants
+    const containerVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const rowVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const lineVariants: Variants = {
+        hidden: { scaleX: 0, originX: 0 },
+        visible: {
+            scaleX: 1,
+            transition: {
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1]
+            }
+        }
+    };
+
+    const contentVariants: Variants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.5,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    const titleVariants: Variants = {
+        hidden: { x: -30, opacity: 0 },
+        visible: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    };
+
     return (
         <section
             className="w-full relative bg-black overflow-hidden flex items-center justify-center"
@@ -85,8 +143,12 @@ const Modules = () => {
               DESKTOP LAYOUT 
               ========================================
              */}
-            <div
-                className="hidden md:block absolute top-0 origin-top-left transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={containerVariants}
+                className="hidden md:block absolute top-0 origin-top-left"
                 style={{
                     width: '1440px',
                     height: '1050px',
@@ -95,7 +157,7 @@ const Modules = () => {
                 }}
             >
                 {/* Heading */}
-                <h2
+                <motion.h2
                     className={`${inter.className} absolute`}
                     style={{
                         width: '368px',
@@ -109,9 +171,10 @@ const Modules = () => {
                         color: '#D5D5D5',
                         margin: 0,
                     }}
+                    variants={titleVariants}
                 >
                     Modules
-                </h2>
+                </motion.h2>
 
                 {/* Table Container */}
                 <div
@@ -125,14 +188,24 @@ const Modules = () => {
                     }}
                 >
                     {rows.map((row, index) => (
-                        <div key={index} style={{ width: '923px', height: '133px', display: 'flex', flexDirection: 'column' }}>
+                        <motion.div
+                            key={index}
+                            variants={rowVariants}
+                            style={{ width: '923px', height: '133px', display: 'flex', flexDirection: 'column' }}
+                        >
                             {/* Line Component */}
-                            <div style={{ width: '923px', height: '1px', backgroundColor: '#313131', marginBottom: '40px' }} />
+                            <motion.div
+                                variants={lineVariants}
+                                style={{ width: '923px', height: '1px', backgroundColor: '#313131', marginBottom: '40px' }}
+                            />
 
                             {/* Inner Content Component */}
                             <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '198px' }}>
                                 {/* First Col Wrapper (Week + Title) */}
-                                <div style={{ display: 'flex', gap: '41px', width: '358px', alignItems: 'baseline' }}>
+                                <motion.div
+                                    variants={contentVariants}
+                                    style={{ display: 'flex', gap: '41px', width: '358px', alignItems: 'baseline' }}
+                                >
                                     <span className={inter.className} style={{
                                         width: '67px',
                                         fontWeight: 600,
@@ -150,35 +223,46 @@ const Modules = () => {
                                         color: '#D5D5D5',
                                         whiteSpace: 'nowrap',
                                     }}>{row.title}</span>
-                                </div>
+                                </motion.div>
 
                                 {/* Description */}
-                                <p className={inter.className} style={{
-                                    width: '353px',
-                                    fontWeight: 600,
-                                    fontSize: '16px',
-                                    lineHeight: '17px',
-                                    letterSpacing: '0.1px',
-                                    color: '#999999',
-                                    margin: 0,
-                                }}>
+                                <motion.p
+                                    variants={contentVariants}
+                                    className={inter.className}
+                                    style={{
+                                        width: '353px',
+                                        fontWeight: 600,
+                                        fontSize: '16px',
+                                        lineHeight: '17px',
+                                        letterSpacing: '0.1px',
+                                        color: '#999999',
+                                        margin: 0,
+                                    }}
+                                >
                                     {row.description}
-                                </p>
+                                </motion.p>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                     {/* Final Bottom Line */}
-                    <div style={{ width: '923px', height: '1px', backgroundColor: '#313131' }} />
+                    <motion.div
+                        variants={lineVariants}
+                        style={{ width: '923px', height: '1px', backgroundColor: '#313131' }}
+                    />
                 </div>
-            </div>
+            </motion.div>
 
             {/* 
               ========================================
               MOBILE LAYOUT 
               ========================================
              */}
-            <div
-                className="block md:hidden absolute top-0 origin-top-left transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={containerVariants}
+                className="block md:hidden absolute top-0 origin-top-left"
                 style={{
                     width: '410px',
                     height: '820px',
@@ -187,7 +271,7 @@ const Modules = () => {
                 }}
             >
                 {/* Heading */}
-                <h2
+                <motion.h2
                     className={`${inter.className} absolute`}
                     style={{
                         width: '390px',
@@ -201,9 +285,10 @@ const Modules = () => {
                         color: '#D5D5D5',
                         margin: 0,
                     }}
+                    variants={titleVariants}
                 >
                     Modules
-                </h2>
+                </motion.h2>
 
                 {/* Table Container */}
                 <div
@@ -217,14 +302,24 @@ const Modules = () => {
                     }}
                 >
                     {rows.map((row, index) => (
-                        <div key={index} style={{ width: '390px', height: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                        <motion.div
+                            key={index}
+                            variants={rowVariants}
+                            style={{ width: '390px', height: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}
+                        >
                             {/* Line Component */}
-                            <div style={{ width: '390px', height: '1px', backgroundColor: '#313131' }} />
+                            <motion.div
+                                variants={lineVariants}
+                                style={{ width: '390px', height: '1px', backgroundColor: '#313131' }}
+                            />
 
                             {/* Inner Content */}
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                                 {/* Week and Title Row */}
-                                <div style={{ display: 'flex', justifyContent: 'space-between', width: '390px', alignItems: 'baseline' }}>
+                                <motion.div
+                                    variants={contentVariants}
+                                    style={{ display: 'flex', justifyContent: 'space-between', width: '390px', alignItems: 'baseline' }}
+                                >
                                     <span className={inter.className} style={{
                                         fontWeight: 600,
                                         fontSize: '14px',
@@ -242,27 +337,34 @@ const Modules = () => {
                                         color: '#D5D5D5',
                                         whiteSpace: 'nowrap',
                                     }}>{row.title}</span>
-                                </div>
+                                </motion.div>
 
                                 {/* Description */}
-                                <p className={inter.className} style={{
-                                    width: '390px',
-                                    fontWeight: 600,
-                                    fontSize: '14px',
-                                    lineHeight: '17px',
-                                    letterSpacing: '0.1px',
-                                    color: '#999999',
-                                    margin: 0,
-                                }}>
+                                <motion.p
+                                    variants={contentVariants}
+                                    className={inter.className}
+                                    style={{
+                                        width: '390px',
+                                        fontWeight: 600,
+                                        fontSize: '14px',
+                                        lineHeight: '17px',
+                                        letterSpacing: '0.1px',
+                                        color: '#999999',
+                                        margin: 0,
+                                    }}
+                                >
                                     {row.description}
-                                </p>
+                                </motion.p>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                     {/* Final Bottom Line */}
-                    <div style={{ width: '390px', height: '1px', backgroundColor: '#313131' }} />
+                    <motion.div
+                        variants={lineVariants}
+                        style={{ width: '390px', height: '1px', backgroundColor: '#313131' }}
+                    />
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

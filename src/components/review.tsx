@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, Variants } from 'framer-motion'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -260,87 +260,84 @@ export default function Review() {
 
     // Responsive section height calculation with proper padding
     const getSectionHeight = () => {
-        if (isDesktop) {
-            // Desktop: Reduced gap + responsive scaling
-            return Math.max(680 * scale, 580)
+        const width = typeof window !== 'undefined' ? window.innerWidth : 0;
+        const isLg = width >= 1024;
+
+        if (isLg) {
+            return 820 * scale
+        } else if (isDesktop) {
+            // md: 768 - 1023
+            return 720 * scale
         } else {
-            // Mobile: Increase base height to 580 to prevent upward overlap
-            return 580 * mobileScale
+            // small: < 768
+            return 540 * mobileScale
         }
     }
 
     const sectionHeight = getSectionHeight()
 
-    // Responsive gap between heading and cards
-    const getHeadingMarginBottom = () => {
-        if (isDesktop) {
-            // Desktop: Reduced from 105px to 50px, scales responsively
-            return `${Math.max(50 * scale, 40)}px`
-        } else {
-            // Mobile: Balanced bottom spacing
-            return '35px'
+    // Animation Variants
+    const titleVariants: Variants = {
+        hidden: { x: -30, opacity: 0 },
+        visible: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1]
+            }
         }
-    }
+    };
 
-    // Responsive top margin for heading
-    const getHeadingMarginTop = () => {
-        if (isDesktop) {
-            // Desktop: Consistent top padding that scales
-            return `${Math.max(30 * scale, 20)}px`
-        } else {
-            // Mobile: Increased top margin to prevent overlapping the CTA section
-            return '30px'
+    const containerVariants: Variants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.8,
+                ease: "easeOut",
+                staggerChildren: 0.1
+            }
         }
-    }
+    };
 
     return (
         <section
-            className="w-full relative flex items-center justify-center overflow-hidden bg-transparent"
+            className="w-full relative flex items-start justify-center overflow-hidden bg-transparent"
             style={{
                 height: `${sectionHeight}px`,
                 minHeight: `${sectionHeight}px`,
-                paddingBottom: isDesktop ? `${Math.max(40 * scale, 30)}px` : '0px',
             }}
         >
             <div
                 style={{
                     width: isDesktop ? '1440px' : '410px',
                     transform: `scale(${isDesktop ? scale : mobileScale})`,
-                    transformOrigin: isDesktop ? 'center center' : 'top center',
+                    transformOrigin: 'top center',
                 }}
                 className="relative flex flex-col items-center"
             >
                 {/* Heading Block */}
-                <div
-                    className="relative w-full flex flex-col items-start"
-                    style={{
-                        paddingLeft: isDesktop ? '52px' : '16px',
-                        marginBottom: getHeadingMarginBottom(),
-                        marginTop: getHeadingMarginTop(),
-                        zIndex: 20,
-                    }}
-                >
-                    <h2
-                        className={`${inter.className} leading-none tracking-tight text-[#D5D5D5]`}
-                        style={{
-                            width: isDesktop ? '356px' : '144px',
-                            fontWeight: 600,
-                            fontStyle: 'normal',
-                            fontSize: isDesktop ? '100px' : '40px',
-                            lineHeight: isDesktop ? '168px' : '37px',
-                            letterSpacing: isDesktop ? '-8px' : '-3px',
-                            margin: 0,
-                            textAlign: 'left',
-                            position: 'relative'
-                        }}
+                <div className="relative w-full flex flex-col items-start px-4 md:px-[52px] mt-[80px] mb-[30px] md:mb-0 z-20">
+                    <motion.h2
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        variants={titleVariants}
+                        className={`${inter.className} font-semibold text-[40px] md:text-[clamp(40px,8vw,100px)] leading-[37px] md:leading-[clamp(37px,12vw,168px)] tracking-[-3px] md:tracking-[clamp(-8px,-1vw,-3px)] text-[#D5D5D5] w-[144px] md:w-[356px] text-left relative m-0`}
                     >
                         Reviews
-                    </h2>
+                    </motion.h2>
                 </div>
 
                 {/* Feedback Cards Wrapper */}
-                <div
+                <motion.div
                     ref={containerRef}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "0px" }}
+                    variants={containerVariants}
                     className="w-full flex flex-row items-center overflow-x-auto overflow-y-visible snap-x snap-mandatory transition-all custom-scrollbar-hidden no-scrollbar relative z-10"
                     style={{
                         gap: isDesktop ? '30px' : '30px',
@@ -462,7 +459,7 @@ export default function Review() {
                             </motion.div>
                         )
                     })}
-                </div>
+                </motion.div>
 
                 {/* Expanded Modal Overlay */}
                 <AnimatePresence>

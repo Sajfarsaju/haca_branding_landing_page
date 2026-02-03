@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import React from 'react';
+import { motion, Variants } from 'framer-motion';
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -43,6 +44,43 @@ const ProgramAudience = () => {
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
     const sectionHeight = isDesktop ? 540 * scale : 1000 * mobileScale;
 
+    // Animation Variants
+    const containerVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants: Variants = {
+        hidden: { y: 30, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 80,
+                damping: 20
+            }
+        }
+    };
+
+    const titleVariants: Variants = {
+        hidden: { y: -20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    };
+
     return (
         <section
             className="w-full relative bg-black overflow-hidden flex items-center justify-center"
@@ -58,8 +96,12 @@ const ProgramAudience = () => {
               DESKTOP LAYOUT 
               ========================================
              */}
-            <div
-                className="hidden md:block absolute top-0 origin-top-left transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={containerVariants}
+                className="hidden md:block absolute top-0 origin-top-left"
                 style={{
                     width: '1440px',
                     height: '540px',
@@ -70,7 +112,7 @@ const ProgramAudience = () => {
                 }}
             >
                 {/* Heading - Desktop */}
-                <div
+                <motion.div
                     className={`${inter.className} absolute`}
                     style={{
                         width: '100%',
@@ -81,6 +123,7 @@ const ProgramAudience = () => {
                         alignItems: 'center',
                         textAlign: 'center',
                     }}
+                    variants={titleVariants}
                 >
                     <h2
                         style={{
@@ -94,7 +137,7 @@ const ProgramAudience = () => {
                     >
                         {'{ This Program Is Perfect If Your Are: }'}
                     </h2>
-                </div>
+                </motion.div>
 
                 {/* Points Container - Desktop */}
                 <div
@@ -103,11 +146,12 @@ const ProgramAudience = () => {
                         width: '1171px',
                         height: '339px',
                         top: '121px',
-                        left: '134.5px', // (1440 - 1171) / 2
+                        left: '134.5px',
                     }}
                 >
                     {/* Point 1 - Desktop */}
-                    <div
+                    <motion.div
+                        variants={itemVariants}
                         className={`${inter.className} absolute flex items-center justify-center`}
                         style={{
                             width: '235px',
@@ -135,15 +179,16 @@ const ProgramAudience = () => {
                         }}>
                             A graphic designer wanting to move into branding
                         </p>
-                    </div>
+                    </motion.div>
 
                     {/* Point 2 - Desktop */}
-                    <div
+                    <motion.div
+                        variants={itemVariants}
                         className={`${inter.className} absolute flex items-center justify-center`}
                         style={{
                             width: '235px',
                             height: '170px',
-                            top: '169px', // 290px - 121px
+                            top: '169px',
                             left: '234px',
                             padding: '46px 10px',
                             gap: '10px',
@@ -165,10 +210,11 @@ const ProgramAudience = () => {
                         }}>
                             A logo designer tired of working without structure
                         </p>
-                    </div>
+                    </motion.div>
 
                     {/* Point 3 - Desktop */}
-                    <div
+                    <motion.div
+                        variants={itemVariants}
                         className={`${inter.className} absolute flex items-center justify-center`}
                         style={{
                             width: '235px',
@@ -196,10 +242,11 @@ const ProgramAudience = () => {
                         }}>
                             A working designer looking to upskill without quitting your job
                         </p>
-                    </div>
+                    </motion.div>
 
                     {/* Point 4 - Desktop */}
-                    <div
+                    <motion.div
+                        variants={itemVariants}
                         className={`${inter.className} absolute flex items-center justify-center`}
                         style={{
                             width: '235px',
@@ -226,10 +273,11 @@ const ProgramAudience = () => {
                         }}>
                             A freelancer who wants to charge confidently for branding
                         </p>
-                    </div>
+                    </motion.div>
 
                     {/* Point 5 - Desktop */}
-                    <div
+                    <motion.div
+                        variants={itemVariants}
                         className={`${inter.className} absolute flex items-center justify-center`}
                         style={{
                             width: '235px',
@@ -255,17 +303,21 @@ const ProgramAudience = () => {
                         }}>
                             A design student who wants real-world clarity early
                         </p>
-                    </div>
+                    </motion.div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* 
               ========================================
               MOBILE LAYOUT 
               ========================================
              */}
-            <div
-                className="block md:hidden absolute top-0 origin-top-left transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={containerVariants}
+                className="block md:hidden absolute top-0 origin-top-left"
                 style={{
                     width: '410px',
                     height: '884px',
@@ -273,28 +325,17 @@ const ProgramAudience = () => {
                     transform: `scale(${mobileScale})`,
                 }}
             >
-                {/* Mobile Main Container */}
-                <div
-                    className="absolute"
-                    style={{
-                        width: '390px',
-                        height: '950px',
-                        left: '10px',
-                        // Border removed as requested
-                        borderRadius: '10px',
-                    }}
-                />
-
                 {/* Heading - Mobile */}
-                <div
+                <motion.div
                     className={`${inter.className} absolute`}
                     style={{
                         width: '390px',
                         height: '64px',
                         top: '40px',
-                        left: '10px', // Adjusted for mobile center
+                        left: '10px',
                         textAlign: 'center',
                     }}
+                    variants={titleVariants}
                 >
                     <h2
                         style={{
@@ -307,15 +348,16 @@ const ProgramAudience = () => {
                         }}
                         dangerouslySetInnerHTML={{ __html: 'This Program Is Perfect <br>If Your Are:' }}
                     />
-                </div>
+                </motion.div>
 
                 {/* Point 1 - Mobile */}
-                <div
+                <motion.div
+                    variants={itemVariants}
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
                         width: '320px',
                         height: '134px',
-                        top: '164px', // Further shifted down for "normal" gap
+                        top: '164px',
                         left: '10px',
                         padding: '46px 10px',
                         gap: '10px',
@@ -336,15 +378,16 @@ const ProgramAudience = () => {
                     }}>
                         A graphic designer wanting to move into branding
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Point 2 - Mobile */}
-                <div
+                <motion.div
+                    variants={itemVariants}
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
                         width: '320px',
                         height: '134px',
-                        top: '328px', // Shifted
+                        top: '328px',
                         left: '80px',
                         padding: '46px 10px',
                         gap: '10px',
@@ -365,15 +408,16 @@ const ProgramAudience = () => {
                     }}>
                         A logo designer tired of working without structure
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Point 3 - Mobile */}
-                <div
+                <motion.div
+                    variants={itemVariants}
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
                         width: '320px',
                         height: '134px',
-                        top: '492px', // Shifted
+                        top: '492px',
                         left: '10px',
                         padding: '46px 10px',
                         gap: '10px',
@@ -394,15 +438,16 @@ const ProgramAudience = () => {
                     }}>
                         A working designer looking to upskill without quitting your job
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Point 4 - Mobile */}
-                <div
+                <motion.div
+                    variants={itemVariants}
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
                         width: '320px',
                         height: '134px',
-                        top: '656px', // Shifted
+                        top: '656px',
                         left: '80px',
                         padding: '46px 10px',
                         gap: '10px',
@@ -423,15 +468,16 @@ const ProgramAudience = () => {
                     }}>
                         A freelancer who wants to charge confidently for branding
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Point 5 - Mobile */}
-                <div
+                <motion.div
+                    variants={itemVariants}
                     className={`${inter.className} absolute flex items-center justify-center`}
                     style={{
                         width: '320px',
                         height: '134px',
-                        top: '820px', // Shifted
+                        top: '820px',
                         left: '10px',
                         padding: '46px 10px',
                         gap: '10px',
@@ -452,8 +498,8 @@ const ProgramAudience = () => {
                     }}>
                         A design student who wants real-world clarity early
                     </p>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 };

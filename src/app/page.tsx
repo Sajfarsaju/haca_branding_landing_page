@@ -1,14 +1,23 @@
+import { Suspense, lazy } from 'react';
 import Hero from "@/components/Hero";
 import ProgramAudience from "@/components/ProgramAudience";
 import Modules from "@/components/Modules";
 import Features from "@/components/Features";
 import Flowchart from "@/components/Flowchart";
-import WorkShowcase from "@/components/WorkShowcase";
-import Review from "@/components/review";
-import FaqSection from "@/components/FaqSection";
 import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
-import PopupForm from "@/components/PopupForm";
+
+// Lazy load below-fold sections for better initial page load
+const WorkShowcase = lazy(() => import("@/components/WorkShowcase"));
+const Review = lazy(() => import("@/components/review"));
+const FaqSection = lazy(() => import("@/components/FaqSection"));
+const Footer = lazy(() => import("@/components/Footer"));
+
+// Simple loading fallback
+const LoadingPlaceholder = () => (
+  <div className="w-full h-screen bg-black flex items-center justify-center">
+    <div className="w-8 h-8 border-4 border-white/20 border-t-white/80 rounded-full animate-spin" />
+  </div>
+);
 
 export default function Home() {
   return (
@@ -18,12 +27,23 @@ export default function Home() {
       <Modules />
       <Features />
       <Flowchart />
-      <WorkShowcase />
-      <Review />
-      <FaqSection />
       <CTA />
-      <Footer />
-      {/* <PopupForm /> */}
+
+      <Suspense fallback={<LoadingPlaceholder />}>
+        <Review />
+      </Suspense>
+
+      <Suspense fallback={<LoadingPlaceholder />}>
+        <WorkShowcase />
+      </Suspense>
+
+      <Suspense fallback={<LoadingPlaceholder />}>
+        <FaqSection />
+      </Suspense>
+
+      <Suspense fallback={<LoadingPlaceholder />}>
+        <Footer />
+      </Suspense>
     </main>
   );
 }

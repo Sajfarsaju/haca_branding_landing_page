@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 interface FAQItem {
     question: string;
@@ -32,9 +32,9 @@ const faqs: FAQItem[] = [
     }
 ];
 
-const AccordionItem = ({ item, isOpen, onClick }: { item: FAQItem; isOpen: boolean; onClick: () => void }) => {
+const AccordionItem = ({ item, isOpen, onClick, variants }: { item: FAQItem; isOpen: boolean; onClick: () => void; variants?: Variants }) => {
     return (
-        <div className="border-b border-white/20">
+        <motion.div variants={variants} className="border-b border-white/20">
             <button
                 onClick={onClick}
                 className="w-full py-8 md:py-10 flex items-center justify-between text-left group transition-colors hover:bg-white/5 px-2 md:px-4"
@@ -66,7 +66,7 @@ const AccordionItem = ({ item, isOpen, onClick }: { item: FAQItem; isOpen: boole
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </motion.div>
     );
 };
 
@@ -77,19 +77,68 @@ const FaqSection = () => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
+    // Animation Variants
+    const titleVariants: Variants = {
+        hidden: { x: -30, opacity: 0 },
+        visible: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    };
+
+    const listVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+            }
+        }
+    };
+
+    const itemVariants: Variants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 70,
+                damping: 15
+            }
+        }
+    };
+
     return (
         <section className="w-full bg-black flex flex-col items-center justify-start overflow-hidden lg:h-[901px]">
             <div className="w-full px-[16px] lg:px-[60px] mx-auto flex flex-col h-full justify-center">
 
                 {/* Title Section */}
-                <div className="mb-[20px] lg:mb-[38px] text-center md:text-left">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={titleVariants}
+                    className="mb-[20px] lg:mb-[38px] text-center md:text-left"
+                >
                     <h2 className="text-[#D5D5D5] font-inter font-semibold text-[40px] lg:text-[100px] leading-[37px] lg:leading-[168px] tracking-[-3px] lg:tracking-[-8px]">
                         Things Asked
                     </h2>
-                </div>
+                </motion.div>
 
                 {/* FAQ List */}
-                <div className="w-full h-[529px] mx-auto md:mx-0">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={listVariants}
+                    className="w-full h-[529px] mx-auto md:mx-0"
+                >
                     <div className="border-t border-white/20">
                         {faqs.map((faq, index) => (
                             <AccordionItem
@@ -97,10 +146,11 @@ const FaqSection = () => {
                                 item={faq}
                                 isOpen={openIndex === index}
                                 onClick={() => handleToggle(index)}
+                                variants={itemVariants}
                             />
                         ))}
                     </div>
-                </div>
+                </motion.div>
 
             </div>
         </section>

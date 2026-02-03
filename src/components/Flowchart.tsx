@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { Inter } from "next/font/google";
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,6 +45,32 @@ const Flowchart = () => {
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
     const sectionHeight = isDesktop ? 705 * scale : 450 * mobileScale;
 
+    // Animation Variants
+    const revealVariants: Variants = {
+        hidden: { opacity: 0, scale: 0.95 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+                duration: 1,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    };
+
+    const titleVariants: Variants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                delay: 0.3,
+                ease: [0.16, 1, 0.3, 1]
+            }
+        }
+    };
+
     return (
         <section
             className="w-full relative bg-black overflow-hidden flex items-center justify-center px-[10px]"
@@ -58,8 +85,11 @@ const Flowchart = () => {
               DESKTOP LAYOUT 
               ========================================
              */}
-            <div
-                className="hidden md:block absolute origin-center transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="hidden md:block absolute origin-center"
                 style={{
                     width: '1440px',
                     height: '705px',
@@ -67,7 +97,11 @@ const Flowchart = () => {
                 }}
             >
                 {/* Flowchart SVG */}
-                <div className="absolute" style={{ width: '1376px', height: '705px', top: '0', left: '32px' }}>
+                <motion.div
+                    variants={revealVariants}
+                    className="absolute"
+                    style={{ width: '1376px', height: '705px', top: '0', left: '32px' }}
+                >
                     <Image
                         src="/flowchartdesktop.svg"
                         alt="Flowchart Desktop"
@@ -75,10 +109,11 @@ const Flowchart = () => {
                         height={705}
                         priority
                     />
-                </div>
+                </motion.div>
 
                 {/* Text Overlay */}
-                <h2
+                <motion.h2
+                    variants={titleVariants}
                     className={`${inter.className} absolute text-center`}
                     style={{
                         width: '417px',
@@ -97,16 +132,19 @@ const Flowchart = () => {
                     }}
                 >
                     You’ll Walk Away With
-                </h2>
-            </div>
+                </motion.h2>
+            </motion.div>
 
             {/* 
               ========================================
               MOBILE LAYOUT 
               ========================================
              */}
-            <div
-                className="block md:hidden absolute origin-center transition-transform duration-100 ease-linear"
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                className="block md:hidden absolute origin-center"
                 style={{
                     width: '410px',
                     height: '450px',
@@ -114,7 +152,11 @@ const Flowchart = () => {
                 }}
             >
                 {/* Flowchart SVG - Mobile */}
-                <div className="absolute" style={{ width: '330.65px', height: '399.49px', top: '25px', left: '40px' }}>
+                <motion.div
+                    variants={revealVariants}
+                    className="absolute"
+                    style={{ width: '330.65px', height: '399.49px', top: '25px', left: '40px' }}
+                >
                     <Image
                         src="/flowchartmobile.svg"
                         alt="Flowchart Mobile"
@@ -122,8 +164,8 @@ const Flowchart = () => {
                         height={399}
                         priority
                     />
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 };
