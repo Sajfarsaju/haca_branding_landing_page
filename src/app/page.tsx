@@ -3,8 +3,12 @@ import ProgramAudience from "@/components/ProgramAudience";
 import Modules from "@/components/Modules";
 import Features from "@/components/Features";
 import Flowchart from "@/components/Flowchart";
-import CTA from "@/components/CTA";
+import WorkShowcase from "@/components/WorkShowcase";
 import Review from "@/components/review";
+import FaqSection from "@/components/FaqSection";
+import CTA from "@/components/CTA";
+import Footer from "@/components/Footer";
+import PopupForm from "@/components/PopupForm";
 
 export default function Home() {
   return (
@@ -14,9 +18,12 @@ export default function Home() {
       <Modules />
       <Features />
       <Flowchart />
-      <CTA />
+      <WorkShowcase />
       <Review />
-
+      <FaqSection />
+      <CTA />
+      <Footer />
+      {/* <PopupForm /> */}
     </main>
   );
 }
