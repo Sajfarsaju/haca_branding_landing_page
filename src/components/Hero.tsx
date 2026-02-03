@@ -141,7 +141,7 @@ const Hero = () => {
                 {/* Logo Section */}
                 <motion.div variants={itemVariants} className="absolute z-30 top-[56px] left-[20px] w-[217px] h-[37px]">
                     <Image
-                        src="/haca-logo-3.png"
+                        src="/haca-logo3x.png"
                         alt="Haca Logo"
                         width={217}
                         height={37}
