@@ -141,7 +141,7 @@ const Hero = () => {
                 {/* Logo Section */}
                 <motion.div variants={itemVariants} className="absolute z-30 top-[56px] left-[20px] w-[217px] h-[37px]">
                     <Image
-                        src="/haca_ds logo 3.png"
+                        src="/haca-logo-3.png"
                         alt="Haca Logo"
                         width={217}
                         height={37}
@@ -178,12 +178,12 @@ const Hero = () => {
                     {/* Photo 1 */}
                     <motion.div variants={photoVariants} className="absolute" style={{ top: '246px', left: '959.11px', width: '229.01px', height: '222.01px' }}>
                         <Image
-                            src="/photo 1 3x.png"
+                            src="/photo-1-3x.png"
                             alt="Design Photo 1"
                             width={249}
                             height={210}
                             sizes="(min-width: 768px) 229px, 145px"
-                            loading="lazy"
+                            priority
                             className="object-contain"
                         />
                     </motion.div>
@@ -191,12 +191,12 @@ const Hero = () => {
                     {/* Photo 2 */}
                     <motion.div variants={photoVariants} className="absolute" style={{ top: '392.03px', left: '511.5px', width: '253.44px', height: '95.40px' }}>
                         <Image
-                            src="/photo 2 3x.png"
+                            src="/photo-2-3x.png"
                             alt="Design Photo 2"
                             width={253}
                             height={95}
                             sizes="(min-width: 768px) 253px, 160px"
-                            loading="lazy"
+                            priority
                             className="object-contain"
                         />
                     </motion.div>
@@ -204,12 +204,12 @@ const Hero = () => {
                     {/* Photo 3 */}
                     <motion.div variants={photoVariants} className="absolute" style={{ top: '507.26px', left: '848.42px', width: '144.09px', height: '139.69px' }}>
                         <Image
-                            src="/photo 3 3x.png"
+                            src="/photo-3-3x.png"
                             alt="Design Photo 3"
                             width={144}
                             height={140}
                             sizes="(min-width: 768px) 144px, 145px"
-                            loading="lazy"
+                            priority
                             className="object-contain"
                         />
                     </motion.div>
@@ -217,12 +217,12 @@ const Hero = () => {
                     {/* Photo 4 */}
                     <motion.div variants={photoVariants} className="absolute" style={{ top: '610.18px', left: '252px', width: '284.23px', height: '135.13px' }}>
                         <Image
-                            src="/photo 4 3x.png"
+                            src="/photo-4-3x.png"
                             alt="Design Photo 4"
                             width={284}
                             height={135}
                             sizes="(min-width: 768px) 284px, 200px"
-                            loading="lazy"
+                            priority
                             className="object-contain"
                         />
                     </motion.div>
@@ -374,10 +374,10 @@ const Hero = () => {
                 {/* Photo Design Group - Mobile */}
                 <div className="absolute z-10 w-full h-full">
                     {[
-                        { src: '/photo 1.svg', top: '130px', left: '280px', w: 145, h: 140 },
-                        { src: '/photo 2.svg', top: '264px', left: '20px', w: 160, h: 60 },
-                        { src: '/photo 3.svg', top: '335px', left: '255px', w: 145, h: 140 },
-                        { src: '/photo 4.svg', top: '532px', left: '10px', w: 200, h: 95 }
+                        { src: '/photo-1-3x.png', top: '130px', left: '280px', w: 145, h: 140 },
+                        { src: '/photo-2-3x.png', top: '264px', left: '20px', w: 160, h: 60 },
+                        { src: '/photo-3-3x.png', top: '335px', left: '255px', w: 145, h: 140 },
+                        { src: '/photo-4-3x.png', top: '532px', left: '10px', w: 200, h: 95 }
                     ].map((photo, idx) => (
                         <motion.div
                             key={idx}
@@ -391,7 +391,7 @@ const Hero = () => {
                                 width={photo.w}
                                 height={photo.h}
                                 sizes="(min-width: 768px) 200px, 160px"
-                                loading="lazy"
+                                priority
                                 className="object-contain"
                             />
                         </motion.div>
